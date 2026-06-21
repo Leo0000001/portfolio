@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Über mich – Leonard Schulz · Webdesign & Automatisierung Berlin</title>
+  <meta name="description" content="Entwickler aus Berlin mit Fokus auf Websites für lokale Betriebe und Windows-Automatisierungen."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F6F3; --bg-card: #FFFFFF; --bg-hover: #F0EEE9;
+      --border: #E2DED7; --border-strong: #C8C4BC;
+      --text: #1A1916; --text-muted: #6B6860; --text-light: #9B9892;
+      --accent: #2563EB; --accent-light: #EFF6FF; --accent-hover: #1D4ED8;
+      --nav-bg: rgba(247,246,243,0.92);
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 8px rgba(0,0,0,0.04);
+    }
+    [data-theme="dark"] {
+      --bg: #0D0F14; --bg-card: #171A22; --bg-hover: #1E2230;
+      --border: #2E3340; --border-strong: #3E4454;
+      --text: #F0EDE8; --text-muted: #9CA3AF; --text-light: #6B7280;
+      --accent: #4F8EF7; --accent-light: #1E3A6E; --accent-hover: #6da4ff;
+      --nav-bg: rgba(13,15,20,0.92);
+      --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px; transition: background 0.25s, color 0.25s; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 6%;
+      background: var(--nav-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-weight: 800; font-size: 1rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-right { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links { display: flex; gap: 1.75rem; align-items: center; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-controls { display: flex; gap: 0.5rem; }
+    .theme-toggle { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-size: 1rem; }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-muted); border-radius: 8px; padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.15s; font-family: 'Inter', sans-serif; }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    .page-header { padding: 8rem 6% 3rem; }
+    .breadcrumb { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .page-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .page-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 1rem; }
+    .page-sub { font-size: 1rem; color: var(--text-muted); max-width: 480px; line-height: 1.75; }
+
+    .divider { height: 1px; background: var(--border); }
+
+    section { padding: 4rem 6%; }
+
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; max-width: 1000px; }
+    .about-text p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; margin-bottom: 1.1rem; }
+    .about-text p strong { color: var(--text); }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; box-shadow: var(--shadow); }
+    .stat-num { font-size: 1.7rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+    .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; margin-top: 0; }
+    .value-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; box-shadow: var(--shadow); }
+    .value-icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+    .value-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .value-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .section-title { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2rem; line-height: 1.2; }
+
+    .cta-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 2.5rem; max-width: 600px; box-shadow: var(--shadow); }
+    .cta-box h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .cta-box p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .cta-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.5rem; border-radius: 8px; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s; font-family: 'Inter', sans-serif; }
+    .btn-primary { background: var(--accent); color: #fff; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border-strong); color: var(--text-muted); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    footer { padding: 2rem 6%; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); flex-wrap: wrap; gap: 0.5rem; }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      .page-header, section { padding-left: 5%; padding-right: 5%; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    [data-lang="en"] { display: none; }
+    body.en [data-lang="de"] { display: none; }
+    body.en [data-lang="en"] { display: revert; }
+  </style>
+</head>
+<body>
+
+  <nav role="navigation" aria-label="Hauptnavigation">
+    <a href="index.html" class="nav-logo">Leonard<span>.</span>Schulz</a>
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#web" data-lang="de">Websites</a><a href="index.html#web" data-lang="en">Websites</a></li>
+        <li><a href="index.html#automation" data-lang="de">Automatisierung</a><a href="index.html#automation" data-lang="en">Automation</a></li>
+        <li><a href="index.html#contact" data-lang="de">Kontakt</a><a href="index.html#contact" data-lang="en">Contact</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" aria-label="Dunkelmodus umschalten">🌙</button>
+        <button class="lang-toggle" onclick="toggleLang()" id="langBtn" aria-label="Sprache wechseln">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+  <header class="page-header">
+    <p class="breadcrumb"><a href="index.html" data-lang="de">← Zurück zur Startseite</a><a href="index.html" data-lang="en">← Back to home</a></p>
+    <p class="page-eyebrow" data-lang="de" aria-hidden="true">Über mich</p>
+    <p class="page-eyebrow" data-lang="en" aria-hidden="true">About</p>
+    <h1 class="page-title" data-lang="de">Entwickler mit Fokus<br>auf echten Nutzen</h1>
+    <h1 class="page-title" data-lang="en">Developer focused<br>on real-world impact</h1>
+    <p class="page-sub" data-lang="de">Ich bin Leonard, Webentwickler und Automatisierungsspezialist aus Berlin. Ich helfe lokalen Betrieben mit Technik, die im Alltag wirklich funktioniert.</p>
+    <p class="page-sub" data-lang="en">I'm Leonard, a web developer and automation specialist based in Berlin. I help local businesses with technology that actually works in day-to-day use.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <section aria-labelledby="about-detail-title">
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-lang="de">Ich entwickle Webanwendungen und Automatisierungslösungen – von schlanken Firmenwebsites bis hin zu komplexen Workflow-Automatisierungen in Windows-Umgebungen und mit n8n.</p>
+        <p data-lang="en">I build web applications and automation solutions – from lean business websites to complex workflow automations in Windows environments and with n8n.</p>
+        <p data-lang="de">Mein Fokus liegt auf <strong>schneller Umsetzung</strong>, sauberem Code und Lösungen, die tatsächlich im Alltag funktionieren – nicht nur im Demo-Modus. Ich lege Wert auf klare Kommunikation und realistische Zeitplanung.</p>
+        <p data-lang="en">My focus is on <strong>fast delivery</strong>, clean code, and solutions that actually work in everyday use – not just in demo mode. I prioritize clear communication and realistic timelines.</p>
+        <p data-lang="de">Als eingetragener Freiberufler (§18 EStG) arbeite ich direkt mit lokalen Unternehmen in Berlin & Brandenburg zusammen – ohne Mittelsmänner und mit persönlichem Ansprechpartner.</p>
+        <p data-lang="en">As a registered freelancer (§18 EStG), I work directly with local businesses in Berlin & Brandenburg – no middlemen, with a personal point of contact.</p>
+        <p data-lang="de">Aktuell verfügbar für neue Projektanfragen.</p>
+        <p data-lang="en">Currently available for new project inquiries.</p>
+      </div>
+      <div class="stat-grid" role="list" aria-label="Kennzahlen">
+        <div class="stat-card" role="listitem">
+          <div class="stat-num">72h</div>
+          <div class="stat-label" data-lang="de">Lieferzeit für One-Pager</div>
+          <div class="stat-label" data-lang="en">Delivery for one-pagers</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="stat-num">n8n</div>
+          <div class="stat-label" data-lang="de">Selbst gehostete Workflows</div>
+          <div class="stat-label" data-lang="en">Self-hosted workflows</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="stat-num">Win</div>
+          <div class="stat-label" data-lang="de">Client &amp; Server Automatisierung</div>
+          <div class="stat-label" data-lang="en">Client &amp; Server automation</div>
+        </div>
+        <div class="stat-card" role="listitem">
+          <div class="stat-num">DE/EN</div>
+          <div class="stat-label" data-lang="de">Zweisprachig</div>
+          <div class="stat-label" data-lang="en">Bilingual</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section aria-labelledby="values-title">
+    <p class="section-label" data-lang="de" aria-hidden="true">Arbeitsweise</p>
+    <p class="section-label" data-lang="en" aria-hidden="true">Approach</p>
+    <h2 class="section-title" id="values-title" data-lang="de">So arbeite ich</h2>
+    <h2 class="section-title" data-lang="en">How I work</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon" aria-hidden="true">⚡</div>
+        <h3 class="value-title" data-lang="de">Schnelle Lieferung</h3>
+        <h3 class="value-title" data-lang="en">Fast delivery</h3>
+        <p class="value-desc" data-lang="de">One-Pager in 48 Stunden, komplexere Seiten innerhalb einer Woche. Kein monatelanges Hin und Her.</p>
+        <p class="value-desc" data-lang="en">One-pagers in 48 hours, more complex sites within a week. No months of back-and-forth.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" aria-hidden="true">🔍</div>
+        <h3 class="value-title" data-lang="de">Klare Preise</h3>
+        <h3 class="value-title" data-lang="en">Transparent pricing</h3>
+        <p class="value-desc" data-lang="de">Festpreispakete ohne versteckte Kosten. Änderungen außerhalb des Scopes werden vorher besprochen.</p>
+        <p class="value-desc" data-lang="en">Fixed-price packages with no hidden costs. Changes outside scope are discussed upfront.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" aria-hidden="true">📱</div>
+        <h3 class="value-title" data-lang="de">Mobile-First</h3>
+        <h3 class="value-title" data-lang="en">Mobile-first</h3>
+        <p class="value-desc" data-lang="de">Alle Websites sehen auf Smartphones genauso gut aus wie auf dem Desktop – weil die meisten Kunden mobil suchen.</p>
+        <p class="value-desc" data-lang="en">All websites look just as good on smartphones as on desktop – because most customers search on mobile.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon" aria-hidden="true">🤝</div>
+        <h3 class="value-title" data-lang="de">Persönlich &amp; lokal</h3>
+        <h3 class="value-title" data-lang="en">Personal &amp; local</h3>
+        <p class="value-desc" data-lang="de">Kein Ticket-System, kein Callcenter. Direkter Kontakt per E-Mail, kurze Reaktionszeiten.</p>
+        <p class="value-desc" data-lang="en">No ticket systems, no call centers. Direct email contact, short response times.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="cta-box">
+      <h2 data-lang="de">Projekt besprechen?</h2>
+      <h2 data-lang="en">Want to discuss a project?</h2>
+      <p data-lang="de">Ich freue mich über eine kurze Anfrage – auch wenn noch nicht alles geklärt ist. Gemeinsam finden wir heraus, was am besten zu deinem Betrieb passt.</p>
+      <p data-lang="en">Feel free to reach out – even if not everything is clear yet. We'll figure out together what fits your business best.</p>
+      <div class="cta-btns">
+        <a href="mailto:schulz.leonard@hotmail.com" class="btn btn-primary" data-lang="de">E-Mail schreiben</a>
+        <a href="mailto:schulz.leonard@hotmail.com" class="btn btn-primary" data-lang="en">Send an email</a>
+        <a href="index.html#web" class="btn btn-outline" data-lang="de">Demos ansehen</a>
+        <a href="index.html#web" class="btn btn-outline" data-lang="en">View demos</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <span>© 2026 Leonard Schulz · Berlin</span>
+    <div style="display:flex; gap: 1.5rem;">
+      <a href="index.html" data-lang="de">Startseite</a>
+      <a href="index.html" data-lang="en">Home</a>
+    </div>
+    <span data-lang="de">Webdesign &amp; Automatisierung</span>
+    <span data-lang="en">Web Design &amp; Automation</span>
+  </footer>
+
+  <script>
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initial = stored || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', initial);
+    document.getElementById('themeBtn').textContent = initial === 'dark' ? '☀️' : '🌙';
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
+    }
+
+    function toggleLang() {
+      const isEn = document.body.classList.toggle('en');
+      const btn = document.getElementById('langBtn');
+      btn.textContent = isEn ? 'DE' : 'EN';
+      btn.setAttribute('aria-label', isEn ? 'Sprache wechseln zu Deutsch' : 'Sprache wechseln zu Englisch');
+      document.documentElement.lang = isEn ? 'en' : 'de';
+    }
+  </script>
+</body>
+</html>
